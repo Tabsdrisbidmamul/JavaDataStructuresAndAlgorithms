@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/StackBackingArray.iml" filepath="$PROJECT_DIR$/StackBackingArray.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SinglyLinkedStack.iml" filepath="$PROJECT_DIR$/SinglyLinkedStack.iml" />
     </modules>
   </component>
 </project>
