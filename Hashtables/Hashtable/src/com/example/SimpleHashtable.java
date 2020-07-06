@@ -1,7 +1,5 @@
 package com.example;
 
-import java.util.Objects;
-
 public class SimpleHashtable{
     private StoredKey[] hashtable;
 
@@ -64,6 +62,16 @@ public class SimpleHashtable{
 
         Employee employee = hashtable[hashedKey].employee;
         hashtable[hashedKey] = null;
+
+        StoredKey[] oldHashtable = hashtable;
+        hashtable = new StoredKey[oldHashtable.length];
+
+        for (StoredKey storedKey : oldHashtable) {
+            if(storedKey != null) {
+                put(storedKey.key, storedKey.employee);
+            }
+        }
+
         return employee;
     }
 
