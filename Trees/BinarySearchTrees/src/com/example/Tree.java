@@ -133,13 +133,32 @@ public class Tree {
             * root = delete(root, value)
             * With the new Node list connections
             * */
+            // Case 1 and 2 (Leaf node or 1 child Node)
             if(subTreeRoot.leftChild == null) {
                 return subTreeRoot.rightChild;
             } else if (subTreeRoot.rightChild == null) {
                 return subTreeRoot.leftChild;
+            // Case 3 (Deletion of Node that has 2 Children (that can very well be subtrees))
+            } else {
+                // Replace the data in the subTreeRoot Node with the smallest value in the right subtree
+                subTreeRoot.data = subTreeRoot.rightChild.min().data;
+
+                // Delete the Node that has the smallest value in the right subtree
+                /*
+                * The line above has gotten the data from the smallest value in the right subtree and set the subtree
+                *  root node with the data returned from the min() call
+                *
+                * We now need to clean up the references - so we call delete on the rightChild of subtree root, and
+                * the value that we are deleting is the subtree root data, because everything down below the subtree
+                * root contains the data with the reference to the smallest value in that subtree and we essentially
+                * need to recreate the rightChild subtree NodeList again with new connections to the Nodes within the
+                * Tree structure
+                *
+                * */
+                subTreeRoot.rightChild = delete(subTreeRoot.rightChild, subTreeRoot.data);
             }
         }
-        return null;
+        return subTreeRoot;
     }
 
     public TreeNode min() {

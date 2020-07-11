@@ -35,6 +35,39 @@ public class Main {
 
         System.out.println("\n---MAX---");
         System.out.println(intTree.max());
+
+        System.out.println("\n\n---IN ORDER---");
+        intTree.inOrder();
+        System.out.println("\n---DELETE---");
+        System.out.println("Deleting Node 15");
+        intTree.delete(15);
+        System.out.println("---IN ORDER---");
+        intTree.inOrder();
+
+        System.out.println("\n\n---IN ORDER---");
+        intTree.inOrder();
+        System.out.println("\n---DELETE---");
+        System.out.println("Deleting Node 27");
+        intTree.delete(27);
+        System.out.println("---IN ORDER---");
+        intTree.inOrder();
+
+        System.out.println("\n\n---IN ORDER---");
+        intTree.inOrder();
+        System.out.println("\n---DELETE---");
+        System.out.println("Deleting Node 25 (root)");
+        intTree.delete(25);
+        System.out.println("---IN ORDER---");
+        intTree.inOrder();
+
+        System.out.println("\n\n---IN ORDER---");
+        intTree.inOrder();
+        System.out.println("\n---DELETE---");
+        System.out.println("Deleting Node 500");
+        intTree.delete(500);
+        System.out.println("---IN ORDER---");
+        intTree.inOrder();
+
     }
 
 }
