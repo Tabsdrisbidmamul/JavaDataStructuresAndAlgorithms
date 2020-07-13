@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class Heap {
     private int[] heap;
@@ -21,6 +22,35 @@ public class Heap {
 
     }
 
+    public int delete(int index) {
+        if(isEmpty()) {
+            throw new IndexOutOfBoundsException("Heap is empty");
+        }
+
+
+        int parent = getParent(index);
+        int deletedValue = heap[index];
+
+        heap[index] = heap[size - 1];
+        heap[size - 1] = 0;
+
+        if(index == 0 || heap[index] < heap[parent]) {
+            fixHeapBelow(index, size - 1);
+        } else {
+            fixHeapAbove(index);
+        }
+        size--;
+        return deletedValue;
+
+    }
+
+    public int peek() {
+        if(!isEmpty()) {
+            return heap[0];
+        }
+        throw new IndexOutOfBoundsException("Cannot peek at an Empty Heap");
+    }
+
     private void fixHeapAbove(int index) {
         // store the inserted value in a temp variable
         int newValue = heap[index];
@@ -38,8 +68,48 @@ public class Heap {
         heap[index] = newValue;
     }
 
+    private void fixHeapBelow(int index, int lastHeapIndex) {
+        int childSwap;
+
+        while(index <= lastHeapIndex) {
+            int leftChild = getChild(index, true);
+            int rightChild = getChild(index, false);
+
+            // left child exists
+            if(leftChild <= lastHeapIndex) {
+                // does not have a right child
+                if(rightChild > lastHeapIndex) {
+                    childSwap = leftChild;
+                } else {
+                    // choose the larger of the 2 children
+                    childSwap = (heap[leftChild] > heap[rightChild]) ? leftChild : rightChild;
+                }
+
+                if(heap[index] < heap[childSwap]) {
+                    int temp = heap[index];
+                    heap[index] = heap[childSwap];
+                    heap[childSwap] = temp;
+                } else {
+                    break;
+                }
+
+                index = childSwap;
+            } else {
+                break;
+            }
+        }
+    }
+
+    private int getChild(int parentIndex, boolean left) {
+        return 2 * parentIndex + (left ? 1 : 2);
+    }
+
     private boolean isFull() {
         return size == heap.length;
+    }
+
+    private boolean isEmpty() {
+        return size == 0;
     }
 
     private void resize() {
